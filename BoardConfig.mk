@@ -50,6 +50,16 @@ RECOVERY_FSTAB_VERSION := 2
 # PowerHAL
 TARGET_POWERHAL_VARIANT := pegasusq
 
+# Basic dexpreopt
+ifeq ($(HOST_OS),linux)
+  ifneq ($(TARGET_BUILD_VARIANT),eng)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT := true
+      WITH_DEXPREOPT_BOOT_IMG_ONLY := true
+    endif
+  endif
+endif
+
 # Selinux
 BOARD_SEPOLICY_DIRS += \
     device/samsung/i9300/selinux
